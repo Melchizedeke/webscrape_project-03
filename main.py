@@ -18,7 +18,7 @@ for item in collections:
         "Book_Title":item.find(class_="title").getText(),
         "Book_Author":item.find(class_="authors").getText(),
         "Pub-Year":item.find(class_="published-year").getText(),
-        "Price($)":item.find(class_="price").getText()
+        "Price($)":item.find(class_="price").find('span').getText()
     })
 
 print(book_details)
