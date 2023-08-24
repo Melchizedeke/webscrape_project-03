@@ -1,6 +1,7 @@
 # Basic Libraries Import
 import requests
 from bs4 import BeautifulSoup
+from csv import DictWriter
 
 # Making a request to the website
 res = requests.get("https://www.abebooks.com/collections/mc/first-editions/53jKjLpLq5krU0qFS5tvnO?cm_sp=ccbrowse-_-p0-_-collections")
@@ -17,8 +18,13 @@ for item in collections:
     book_details.append({
         "Book_Title":item.find(class_="title").getText(),
         "Book_Author":item.find(class_="authors").getText(),
-        "Pub-Year":item.find(class_="published-year").getText(),
+        "Pub_Year":item.find(class_="published-year").getText(),
         "Price($)":item.find(class_="price").find('span').getText()
     })
 
-print(book_details)
+with open("books.csv", "w", encoding='utf-8') as file:
+    header = ["Book_Title", "Book_Author", "Pub_Year", "Price($)"]
+    csv_writer = DictWriter(file, fieldnames=header)
+    csv_writer.writeheader()
+    for book in book_details:
+        csv_writer.writerow(book)
