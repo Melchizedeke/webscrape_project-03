@@ -22,3 +22,5 @@ The basics libraries I will be using are:
 - `csv`
 
 I hope to import other libraries as I feel the need to add more functionalities to the code. I am super excited about this.
+
+Still having issues with the price variable
